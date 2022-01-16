@@ -138,7 +138,7 @@ var createTaskActions = function (taskId) {
 	return actionContainerEl;
 }
 
-formEl.addEventListener("submit", taskFormHandler);
+
 
 var taskStatusChangeHandler = function (event) {
 	// get the task item's ID
@@ -225,10 +225,34 @@ var deleteTask = function (taskId) {
 	saveTasks();
 };
 
-var saveTasks = function () {
+var saveTasks = function() {
 	localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+
+
+	// Gets task items from localStorage.
+
+	// Converts tasks from the string format back into an array of objects.
+
+	// Iterates through a tasks array and creates task elements on the page from it.
+var loadTasks = function() {
+	var savedTasks = localStorage.getItem("tasks");
+	console.log(savedTasks);
+
+	if (savedTasks === null) {
+		tasks = [];
+		return false;
+	}
+
+	tasks = JSON.parse(tasks);
+
+	console.log(tasks);
 }
+
+formEl.addEventListener("submit", taskFormHandler);
 
 pageContentEl.addEventListener("click", taskButtonHandler);
 
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+loadTasks();
